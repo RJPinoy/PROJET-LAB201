@@ -9,29 +9,29 @@ const Login = () => {
     const auth = FIREBASE_AUTH;
 
     const signIn = async () => {
-        console.log('email : ', email, 'password : ', password)
+        console.log('email : ', email.target.value, 'password : ', password.target.value)
         setIsLoading(true);
-        // try {
-        //     const response = await signInWithEmailAndPassword(auth, email, password);
-        //     console.log(response)
-        // } catch (e) {
-        //     console.log(e)
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        try {
+            const response = await signInWithEmailAndPassword(auth, email.target.value, password.target.value);
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     const SignUp = async () => {
         console.log('Should create an account')
         setIsLoading(true);
-        // try {
-        //     const response = await createUserWithEmailAndPassword(auth, email, password);
-        //     console.log(response)
-        // } catch (e) {
-        //     console.log(e)
-        // } finally {
-        //     setIsLoading(false);
-        // }
+        try {
+            const response = await createUserWithEmailAndPassword(auth, email.target.value, password.target.value);
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     if (isLoading) {
@@ -42,8 +42,8 @@ const Login = () => {
         <>
             <div>
                     <p>Login</p>
-                    <input placeholder='Email' onChange={ setEmail }/>
-                    <input placeholder='Password' onChange={ setPassword } />
+                    <input placeholder='Email' required={ true } onInput={ setEmail }/>
+                    <input placeholder='Password' type="password" required={ true } onInput={ setPassword } />
                     {
                         isLoading ? 
                         <p>Loading...</p>
