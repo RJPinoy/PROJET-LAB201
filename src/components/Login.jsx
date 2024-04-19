@@ -1,28 +1,28 @@
 import * as React from "react";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(true);
-    const auth = FIREBASE_AUTH;
+
+    if (isLoading) {
+        setIsLoading(false);
+    }
 
     const signIn = async () => {
         console.log('email : ', email.target.value, 'password : ', password.target.value)
         setIsLoading(true);
         try {
-            const response = await signInWithEmailAndPassword(auth, email.target.value, password.target.value);
+            const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email.target.value, password.target.value);
             console.log(response)
         } catch (e) {
             console.log(e)
         } finally {
             setIsLoading(false);
         }
-    }
-
-    if (isLoading) {
-        setIsLoading(false);
     }
 
     return (
@@ -37,7 +37,9 @@ const Login = () => {
                     :
                     <div>
                         <button onClick={ signIn }>Sign in</button>
-                        <button onClick={ console.log('Go to homepage') }>Continue as invited</button>
+                        <Link to={ '/' }>
+                            <button>Continue as invited</button>
+                        </Link>
                     </div>
                 }
             </div>
