@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
     const [email, setEmail] = React.useState('');
@@ -21,19 +21,6 @@ const Login = () => {
         }
     }
 
-    const SignUp = async () => {
-        console.log('Should create an account')
-        setIsLoading(true);
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email.target.value, password.target.value);
-            console.log(response)
-        } catch (e) {
-            console.log(e)
-        } finally {
-            setIsLoading(false);
-        }
-    }
-
     if (isLoading) {
         setIsLoading(false);
     }
@@ -41,18 +28,18 @@ const Login = () => {
     return (
         <>
             <div>
-                    <p>Login</p>
-                    <input placeholder='Email' required={ true } onInput={ setEmail }/>
-                    <input placeholder='Password' type="password" required={ true } onInput={ setPassword } />
-                    {
-                        isLoading ? 
-                        <p>Loading...</p>
-                        :
-                        <div>
-                            <button onClick={ signIn }>LOG IN</button>
-                            <button onClick={ SignUp }>SIGN UP</button>
-                        </div>
-                    }
+                <h2>Login</h2>
+                <input placeholder='Email' required={ true } onInput={ setEmail }/>
+                <input placeholder='Password' type="password" required={ true } onInput={ setPassword } />
+                {
+                    isLoading ? 
+                    <p>Loading...</p>
+                    :
+                    <div>
+                        <button onClick={ signIn }>Sign in</button>
+                        <button onClick={ console.log('Go to homepage') }>Continue as invited</button>
+                    </div>
+                }
             </div>
         </>
     );
