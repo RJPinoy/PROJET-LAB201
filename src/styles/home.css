@@ -1,0 +1,36 @@
+/* Video css */
+    #div_intro_video {
+        position: relative;
+    }
+
+    #skip_video_button, #sound_video_button {
+        position: absolute;
+        z-index: 1;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    #skip_video_button{
+        bottom: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #sound_video_button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        top: 5%;
+        right: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
+
+    #skip_video_button:hover, #sound_video_button:hover {
+        opacity: 1!important;
+    }
+
+    #input_volume {
+        height: 5px;
+    }

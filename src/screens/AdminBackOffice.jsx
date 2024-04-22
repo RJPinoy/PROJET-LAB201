@@ -10,7 +10,7 @@ const AdminBackOffice = () => {
 
     React.useEffect(() => {
         onAuthStateChanged(FIREBASE_AUTH, (user) => {
-            console.log(user);
+            // console.log(user);
             setUser(user);
             setLoading(false);
         });
