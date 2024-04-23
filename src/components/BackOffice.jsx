@@ -10,19 +10,22 @@ const BackOffice = ({ user }) => {
     const [videos, setVideos] = React.useState([]);
     const [videoUpload, setVideoUpload] = React.useState(null);
     const [videosList, setVideosList] = React.useState([]);
-    
+    const [uploading, setUploading] = React.useState(false);
+    const [uploadError, setUploadError] = React.useState(null);
+
     const videosListRef = ref(storage, "videos/");
 
     React.useEffect(() => {
-        listAll(videosListRef).then((response) => {
-            // console.log(response.items);
-            const promises = response.items.map((item) => getDownloadURL(item));
-            Promise.all(promises).then((urls) => {
-                setVideosList(urls);
+        listAll(videosListRef)
+            .then((response) => {
+                const promises = response.items.map((item) => getDownloadURL(item));
+                Promise.all(promises).then((urls) => {
+                    setVideosList(urls);
+                });
+            })
+            .catch((error) => {
+                console.error("Error listing videos:", error);
             });
-        }).catch((error) => {
-            console.error("Error listing videos:", error);
-        });
 
         getData();
     }, []);
@@ -41,38 +44,40 @@ const BackOffice = ({ user }) => {
 
         const videoRef = ref(storage, `videos/${videoUpload.name}`);
 
-        uploadBytes(videoRef, videoUpload).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then((url) => {
-                const metadata = {
-                    name: videoUpload.name,
-                    type: videoUpload.type,
-                    lastModifiedDate: videoUpload.lastModifiedDate,
-                    size: videoUpload.size,
-                    url: url,
-                    homepage: false,
-                };
-                sendVideoToFirestore(metadata);
-                // console.log(metadata);
-                // console.log(videoUpload);
+        setUploading(true); // Set uploading status to true
 
-                // setVideosList((prev) => [...prev, url]);
-            }).catch((error) => {
-                console.error("Error getting download URL:", error);
-            }).catch((error) => {
+        uploadBytes(videoRef, videoUpload)
+            .then((snapshot) => {
+                getDownloadURL(snapshot.ref).then((url) => {
+                    const metadata = {
+                        name: videoUpload.name,
+                        type: videoUpload.type,
+                        lastModifiedDate: videoUpload.lastModifiedDate,
+                        size: videoUpload.size,
+                        url: url,
+                        homepage: false,
+                    };
+                    sendVideoToFirestore(metadata);
+                });
+            })
+            .catch((error) => {
+                setUploadError(error.message); // Set error message if upload fails
                 console.error("Error uploading video:", error);
+            })
+            .finally(() => {
+                setUploading(false); // Set uploading status to false after upload completes or fails
             });
-        });
     };
 
     const sendVideoToFirestore = async (metadata) => {
         try {
-            await setDoc(doc(firestore, 'videos', metadata.name), metadata);
+            await setDoc(doc(firestore, "videos", metadata.name), metadata);
             console.log("Document written with ID: ", metadata.name);
             window.location.reload();
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-    }
+    };
 
     const getData = async () => {
         try {
@@ -80,7 +85,6 @@ const BackOffice = ({ user }) => {
             let videoArray = [];
             querySnapshot.forEach((doc) => {
                 videoArray.push(doc.data());
-                // console.log('videoArray : ', videoArray);
             });
 
             setVideos(videoArray);
@@ -90,45 +94,48 @@ const BackOffice = ({ user }) => {
     };
 
     const handleCheck = async (video) => {
-        console.log('should change homepage bool :', video.name);
+        console.log("should change homepage bool :", video.name);
         try {
             const querySnapshot = await getDocs(collection(firestore, "videos"));
             const batch = writeBatch(firestore);
-    
+
             querySnapshot.forEach((doc) => {
-                const docRef = doc.ref; // Accessing document reference from the snapshot
-                const currentData = doc.data(); // Get the current data of the document
-                batch.update(docRef, { homepage: !currentData.homepage }); // Toggle the homepage field
+                const docRef = doc.ref;
+                const currentData = doc.data();
+                batch.update(docRef, { homepage: !currentData.homepage });
             });
-    
+
             await batch.commit();
             console.log("All documents updated successfully.");
             window.location.reload();
         } catch (e) {
             console.error("Error updating documents: ", e);
         }
-    };     
+    };
 
     return (
         <>
             <nav className="user-info">
                 <p>Welcome {user.email}</p>
                 <Link to="/">
-                <button className="sign-out-button" onClick={handleSignOut}>
-                    Sign out
-                </button>
+                    <button className="sign-out-button" onClick={handleSignOut}>
+                        Sign out
+                    </button>
                 </Link>
             </nav>
-            
+
             <div className="backoffice-container">
-                
                 <div className="video-upload-section">
                     <div className="video-upload-input">
-                        <input type="file" accept="video/mp4" onChange={(e) => { setVideoUpload(e.target.files[0]) }} />
-                        <button className="upload-button" onClick={ uploadVideo }>Upload video</button>
+                        <input type="file" accept="video/mp4" onChange={(e) => setVideoUpload(e.target.files[0])} />
+                        <button className="upload-button" onClick={uploadVideo}>
+                            Upload video
+                        </button>
                     </div>
+                    {uploading && <p>Uploading video...</p>} {/* Show uploading status */}
+                    {uploadError && <p className="error-message">{uploadError}</p>} {/* Show error message */}
                 </div>
-                
+
                 <table className="video-table">
                     <thead>
                         <tr>
@@ -143,18 +150,12 @@ const BackOffice = ({ user }) => {
                     </thead>
 
                     <tbody>
-                        {videosList.length > 0 ?
+                        {videosList.length > 0 ? (
                             videosList.map((url, index) => (
                                 <tr key={index}>
+                                    <td>{videos[index].homepage ? "X" : null}</td>
                                     <td>
-                                        {videos[index].homepage ?
-                                            'X'
-                                        :
-                                            null
-                                        }
-                                    </td>
-                                    <td>
-                                        <video width={ 100 } height={ 100 } controls>
+                                        <video width={100} height={100} controls>
                                             <source src={url} type="video/mp4" />
                                             Sorry, your browser doesn't support videos.
                                         </video>
@@ -168,11 +169,11 @@ const BackOffice = ({ user }) => {
                                     </td>
                                 </tr>
                             ))
-                        :
+                        ) : (
                             <tr>
                                 <td colSpan="6">No video added yet...</td>
                             </tr>
-                        }
+                        )}
                     </tbody>
                 </table>
             </div>
