@@ -1,35 +1,68 @@
 import * as React from "react";
 import "../styles/home.css";
+import { firestore } from "../../firebaseConfig";
+import { collection, getDocs, query, where } from "firebase/firestore";  
 
 const HomeScreen = () => {
+    const [videoHomepage, setVideoHomepage] = React.useState();
     const [videoFinished, setVideoFinished] = React.useState(false);
     const [showVolumeInput, setShowVolumeInput] = React.useState(false);
     const [volumeInputValue, setVolumeInputValue] = React.useState(0.5);
+    const [isLoading, setIsLoading] = React.useState(true);
+
+    const fetchVideo = async () => {
+        const q = query(collection(firestore, "videos"), where("homepage", "==", true));
+
+        try {
+            const videosSnapshot = await getDocs(q);
+            videosSnapshot.forEach((doc) => {
+                console.log(doc.id, " => ", doc.data());
+                setVideoHomepage(doc.data())
+            });
+        } catch (error) {
+            console.error("Error fetching video names:", error);
+        }
+    };
 
     React.useEffect(() => {
-        const root = document.getElementById('root');
-        const skipButton = document.getElementById('skip_video_button');
-        const soundButton = document.getElementById('sound_video_button');
-        let timeoutId;
-    
-        // Add event listener for mousemove event
-        root.addEventListener('mousemove', () => {
-            // Show the skip button and reset the timer
-            skipButton.style.opacity = 1;
-            soundButton.style.opacity = 1;
-
-            clearTimeout(timeoutId); // Clear the previous timeout
-            timeoutId = setTimeout(() => {
-                // Hide the skip button after 1 second of inactivity
-                skipButton.style.opacity = 0;
-                soundButton.style.opacity = 0;
-            }, 100);
-        });
-
-        soundButton.addEventListener('mouseleave', () => {
-            setShowVolumeInput(false);
-        })
+        fetchVideo();
+        setIsLoading(false);
     }, []);
+
+    React.useEffect(() => {
+        if (videoHomepage) {
+            const root = document.getElementById('root');
+            const skipButton = document.getElementById('skip_video_button');
+            const soundButton = document.getElementById('sound_video_button');
+            let timeoutId;
+        
+            // Add event listener for mousemove event
+            const handleMouseMove = () => {
+                // Show the skip button and reset the timer
+                skipButton.style.opacity = 1;
+                soundButton.style.opacity = 1;
+    
+                clearTimeout(timeoutId); // Clear the previous timeout
+                timeoutId = setTimeout(() => {
+                    // Hide the skip button after 1 second of inactivity
+                    skipButton.style.opacity = 0;
+                    soundButton.style.opacity = 0;
+                }, 100);
+            };
+    
+            const handleSoundButtonMouseLeave = () => {
+                setShowVolumeInput(false);
+            };
+    
+            root?.addEventListener('mousemove', handleMouseMove);
+            soundButton?.addEventListener('mouseleave', handleSoundButtonMouseLeave);
+    
+            return () => {
+                root?.removeEventListener('mousemove', handleMouseMove);
+                soundButton?.removeEventListener('mouseleave', handleSoundButtonMouseLeave);
+            };
+        }
+    }, [videoHomepage]);
 
     const toggleVolumeInput = () => {
         setShowVolumeInput(!showVolumeInput);
@@ -47,33 +80,43 @@ const HomeScreen = () => {
         setVideoFinished(true);
     };
 
+    if(isLoading) {
+        return <h2>Loading...</h2>
+    }
+
     return (
         <>
             {!videoFinished ?
                 <div id="div_intro_video">
-                    <video id="intro_video" width={'100%'} height={'100%'} autoPlay controls onEnded={ handleVideoEnd }>
-                        <source src="/breaking_montage_test.mp4" type="video/mp4" />
-                        Sorry, your browser doesn't support videos.
-                    </video>
+                    { videoHomepage ?
+                        <>
+                            <video id="intro_video" width={'100%'} height={'100%'} autoPlay controls onEnded={ handleVideoEnd }>
+                                <source src={ videoHomepage.url } type="video/mp4" />
+                                Sorry, your browser doesn't support videos.
+                            </video>
 
-                    <div id="sound_video_button">
-                        {showVolumeInput ? (
-                            <input 
-                                id="input_volume"
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01" 
-                                value={ volumeInputValue }
-                                onChange={ handleVolumeChange } 
-                            />
-                        ) : (
-                            <button onClick={ toggleVolumeInput }>
-                                <img width="30" height="30" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"/>
-                            </button>
-                        )}
-                    </div>
-                    <button id="skip_video_button" onClick={ handleVideoEnd }>Skip</button>
+                            <div id="sound_video_button">
+                                {showVolumeInput ? (
+                                    <input 
+                                        id="input_volume"
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.01" 
+                                        value={ volumeInputValue }
+                                        onChange={ handleVolumeChange } 
+                                    />
+                                ) : (
+                                    <button onClick={ toggleVolumeInput }>
+                                        <img width="30" height="30" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"/>
+                                    </button>
+                                )}
+                            </div>
+                            <button id="skip_video_button" onClick={ handleVideoEnd }>Skip</button>
+                        </>
+                    :
+                        <h2>Almost there..</h2>
+                    }
                 </div>
                 :
                 <>
@@ -88,5 +131,5 @@ const HomeScreen = () => {
         </>
     );
 }
- 
+
 export default HomeScreen;

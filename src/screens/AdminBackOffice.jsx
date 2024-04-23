@@ -8,6 +8,9 @@ const AdminBackOffice = () => {
     const [user, setUser] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
+    const root = document.getElementById('root');
+    root.style.height = window.innerHeight + 'px';
+
     React.useEffect(() => {
         onAuthStateChanged(FIREBASE_AUTH, (user) => {
             // console.log(user);
