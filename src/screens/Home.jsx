@@ -91,7 +91,7 @@ const HomeScreen = () => {
                 <div id="div_intro_video">
                     { videoHomepage ?
                         <>
-                            <video id="intro_video" width={'100%'} height={'100%'} autoPlay controls onEnded={ handleVideoEnd }>
+                            <video id="intro_video" width={'100%'} height={'100%'} autoPlay muted onEnded={ handleVideoEnd }>
                                 <source src={ videoHomepage.url } type="video/mp4" />
                                 Sorry, your browser doesn't support videos.
                             </video>

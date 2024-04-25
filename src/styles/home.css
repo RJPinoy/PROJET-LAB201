@@ -1,6 +1,21 @@
 /* Video css */
     #div_intro_video {
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #intro_video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;  
     }
 
     #skip_video_button, #sound_video_button {
@@ -11,7 +26,7 @@
     }
 
     #skip_video_button{
-        bottom: 25%;
+        bottom: 10%;
         left: 50%;
         transform: translateX(-50%);
     }
