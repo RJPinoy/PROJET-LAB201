@@ -49,7 +49,7 @@ const HomeScreen = () => {
                     // Hide the skip button after 1 second of inactivity
                     skipButton.style.opacity = 0;
                     soundButton.style.opacity = 0;
-                }, 100);
+                }, 500);
             };
     
             const handleSoundButtonMouseLeave = () => {
@@ -110,7 +110,7 @@ const HomeScreen = () => {
                                     />
                                 ) : (
                                     <button onClick={ toggleVolumeInput }>
-                                        <img width="30" height="30" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"/>
+                                        <img width="20" height="20" src="https://img.icons8.com/ios/50/room-sound.png" alt="room-sound"/>
                                     </button>
                                 )}
                             </div>

@@ -42,10 +42,31 @@
         height: 5vw;
     }
 
+    #sound_video_button button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 15px;
+        border-radius: 50%;
+        background-color: #f9f9f9;
+    }
+
     #skip_video_button:hover, #sound_video_button:hover {
         opacity: 1!important;
     }
 
     #input_volume {
+        transform: rotate(-90deg) translateX(-60px);
         height: 5px;
+        appearance: none;
+        border-radius: 20px;
+        border: 1px solid black;
+    }
+
+    #input_volume::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        -webkit-appearance: none;
+        background: #ffffff;
     }
