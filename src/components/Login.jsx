@@ -1,50 +1,45 @@
 import * as React from "react";
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [isLoading, setIsLoading] = React.useState(true);
-
-    if (isLoading) {
-        setIsLoading(false);
-    }
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState(null);
 
     const signIn = async () => {
-        console.log('email : ', email.target.value, 'password : ', password.target.value)
         setIsLoading(true);
+        setError(null); // Clear any previous errors
         try {
-            const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email.target.value, password.target.value);
-            console.log(response)
+            const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+            console.log(response);
+            // Handle successful sign-in, e.g., redirect the user
         } catch (e) {
-            console.log(e)
+            console.error(e);
+            setError("Failed to sign in. Please check your credentials."); // Set the error message
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     return (
-        <>
-            <div>
-                <h2>Login</h2>
-                <input placeholder='Email' required={ true } onInput={ setEmail }/>
-                <input placeholder='Password' type="password" required={ true } onInput={ setPassword } />
-                {
-                    isLoading ? 
+        <div className="login-form">
+            <h2>Login</h2>
+            <input className="input-field" placeholder='Email' required={true} value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input className="input-field" placeholder='Password' type="password" required={true} value={password} onChange={(e) => setPassword(e.target.value)} />
+            {
+                isLoading ?
                     <p>Loading...</p>
                     :
-                    <div>
-                        <button onClick={ signIn }>Sign in</button>
-                        <Link to={ '/' }>
-                            <button>Continue as invited</button>
-                        </Link>
+                    <div className="button-container">
+                        
+            {error && <p className="error-message">{error}</p>} {/* Display error message if there's an error */}
+                        <button className="signin-button" onClick={signIn}>Sign in</button>
                     </div>
-                }
-            </div>
-        </>
+            }
+        </div>
     );
-}
- 
+};
+
 export default Login;
