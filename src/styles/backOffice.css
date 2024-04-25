@@ -60,7 +60,17 @@
         width: 100%;
         margin-bottom: 20px;
         display: flex;
-        justify-content: end;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .user-info button {
+        margin-left: 20px;
+    }
+
+    .user-info div {
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 

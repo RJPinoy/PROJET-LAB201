@@ -116,12 +116,20 @@ const BackOffice = ({ user }) => {
     return (
         <>
             <nav className="user-info">
-                <p>Welcome {user.email}</p>
                 <Link to="/">
-                    <button className="sign-out-button" onClick={handleSignOut}>
-                        Sign out
+                    <button>
+                        Homepage
                     </button>
                 </Link>
+                
+                <div>
+                    <p>Welcome {user.email}</p>
+                    <Link to="/">
+                        <button className="sign-out-button" onClick={handleSignOut}>
+                            Sign out
+                        </button>
+                    </Link>
+                </div>
             </nav>
 
             <div className="backoffice-container">
