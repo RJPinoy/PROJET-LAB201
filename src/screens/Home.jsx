@@ -1,7 +1,8 @@
 import * as React from "react";
 import "../styles/home.css";
 import { firestore } from "../../firebaseConfig";
-import { collection, getDocs, query, where } from "firebase/firestore";  
+import { collection, getDocs, query, where } from "firebase/firestore";
+import ChapterDj from "./ChapterDj";
 
 const HomeScreen = () => {
     const [videoHomepage, setVideoHomepage] = React.useState();
@@ -126,6 +127,8 @@ const HomeScreen = () => {
                             <article>Lorem ipsum dolor sit amet.</article>
                         </section>
                     </main>
+
+                    <ChapterDj />
                 </>
             }
         </>

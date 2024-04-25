@@ -2,6 +2,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom';
 import HomeScreen from './screens/Home';
 import AdminBackOffice from './screens/AdminBackOffice';
+import ChapterDj from './screens/ChapterDj';
 
 function App() {
   return (
