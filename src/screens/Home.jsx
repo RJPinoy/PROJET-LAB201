@@ -2,6 +2,7 @@ import * as React from "react";
 import "../styles/home.css";
 import { firestore } from "../../firebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Chapter1 from "./Chapter1";
 import ChapterDj from "./ChapterDj";
 
 const HomeScreen = () => {
@@ -128,7 +129,8 @@ const HomeScreen = () => {
                         </section>
                     </main>
 
-                    <ChapterDj />
+                    <Chapter1 />
+                    {/* <ChapterDj /> */}
                 </>
             }
         </>

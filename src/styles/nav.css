@@ -1,0 +1,47 @@
+.flex {
+    display: flex;
+}
+
+.m-10 {
+    margin: 2.5rem;
+}
+
+.h-20 {
+    height: 5rem;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    z-index: 999;
+    margin-left: -15px;
+}
+
+#sidebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar li {
+    margin-bottom: 5vw;
+    text-align: start;
+    font-size: 1rem; /* equivalent to text-base */
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* equivalent to ease-in-out */
+    transition-duration: 0.5s; /* equivalent to duration-500 */
+}
+
+#sidebar li:hover {
+    transform: translateX(1rem); /* equivalent to hover:translate-x-4 */
+}
+
+#sidebar li a {
+    margin-top: 2.5rem; /* equivalent to mt-10 */
+    margin-bottom: 2.5rem; /* equivalent to mb-10 */
+    text-decoration: none;
+    color: inherit;
+}
