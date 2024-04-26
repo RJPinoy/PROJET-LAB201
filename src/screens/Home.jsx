@@ -74,7 +74,11 @@ const HomeScreen = () => {
         setVolumeInputValue(event.target.value);
         const video = document.getElementById("intro_video");
         if (video) {
+            console.log(volumeInputValue)
+            video.muted = false;
             video.volume = volumeInputValue;
+
+            volumeInputValue <= 0.01 ? video.muted = true : null;
         }
     };
 

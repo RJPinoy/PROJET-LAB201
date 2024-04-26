@@ -2,16 +2,18 @@ import "../styles/backOffice.css";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
-import { doc, collection, setDoc, getDocs, updateDoc, writeBatch } from "firebase/firestore";
+import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from "firebase/storage";
+import { doc, collection, setDoc, getDocs, writeBatch, deleteDoc } from "firebase/firestore";
 import { FIREBASE_AUTH, firestore, storage } from "../../firebaseConfig";
 
 const BackOffice = ({ user }) => {
+    const [currentVideo, setCurrentVideo] = React.useState();
     const [videos, setVideos] = React.useState([]);
     const [videoUpload, setVideoUpload] = React.useState(null);
     const [videosList, setVideosList] = React.useState([]);
     const [uploading, setUploading] = React.useState(false);
     const [uploadError, setUploadError] = React.useState(null);
+    const [deleteModal, setDeleteModal] = React.useState(false);
 
     const videosListRef = ref(storage, "videos/");
 
@@ -113,8 +115,52 @@ const BackOffice = ({ user }) => {
         }
     };
 
+    const handleDelete = (video) => {
+        setDeleteModal(true);
+        setCurrentVideo(video)
+    };
+
+    const confirmDelete = async (video) => {
+        console.log("should delete :", video.name);
+        try {
+            // Delete the file
+            deleteObject(ref(storage, `videos/${ video.name }`)).then(() => {
+                // File deleted successfully
+                console.log("File deleted successfully in the storage.");
+                deleteVideoToFirestore(video);
+            })
+        } catch (e) {
+            console.error("Error updating documents: ", e);
+        }
+    };
+
+    const deleteVideoToFirestore = async (metadata) => {
+        try {
+            await deleteDoc(doc(firestore, "videos", metadata.name));
+            console.log("Document deleted with ID: ", metadata.name);
+            window.location.reload();
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
+
     return (
         <>
+            { deleteModal ?
+                <>
+                    <div className="delete-modal">
+                        <div className="modal-content">
+                            <p>Are you sure you want to delete this video <span style={{ color: 'red' }}>{ currentVideo.name }</span>?</p>
+                            <div className="modal-buttons">
+                                <button onClick={ () => setDeleteModal(false) }>Cancel</button>
+                                <button onClick={ () => confirmDelete(currentVideo) }>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            :
+                null
+            }
             <nav className="user-info">
                 <Link to="/">
                     <button>
@@ -140,7 +186,7 @@ const BackOffice = ({ user }) => {
                             Upload video
                         </button>
                     </div>
-                    {uploading && <p>Uploading video...</p>} {/* Show uploading status */}
+                    {uploading && <p>Uploading video... Please wait... This can take a few minutes...</p>} {/* Show uploading status */}
                     {uploadError && <p className="error-message">{uploadError}</p>} {/* Show error message */}
                 </div>
 
@@ -153,7 +199,8 @@ const BackOffice = ({ user }) => {
                             <th>Type</th>
                             <th>Size (octets)</th>
                             <th>URL</th>
-                            <th></th>
+                            <th>Set video to homepage</th>
+                            <th>Delete video</th>
                         </tr>
                     </thead>
 
@@ -174,6 +221,11 @@ const BackOffice = ({ user }) => {
                                     <td>{videos[index].url}</td>
                                     <td>
                                         <button onClick={() => handleCheck(videos[index])}>Set as homepage video</button>
+                                    </td>
+                                    <td>
+                                        <button style={{ backgroundColor: '#f44336' }} onClick={() => handleDelete(videos[index])}>
+                                            DELETE
+                                        </button>
                                     </td>
                                 </tr>
                             ))
