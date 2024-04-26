@@ -1,50 +1,59 @@
 #dj_set {
-    position: absolute;
+    position: sticky;
     bottom: 0;
     left: 0;
     min-width: 1200px;
     max-width: 1980px;
-    width: 100%;
+    width: 1200px;
     height: 500px;
+    margin: auto;
 
-    background-image: url("/Set_de_DJ_NG.png");
-    background-position: center center;
+    background-image: url("/Set_de_DJ_v2.png");
+    background-position: bottom;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
 }
 
 #button_top_left, #button_bottom_left, #button_top_right, #button_bottom_right {
+    display: inline-block;
     position: absolute;
-    width: 2vw;
-    height: 1vw;
-    /* border: 1px solid red; */
+    width: 29px;
+    height: 19px;
     cursor: pointer;
-    border-radius: 50%;
     transition: 0.5s ease-in-out;
+    /* border: 1px solid red; */
+}
+
+#button_top_left, #button_bottom_left {
+    transform: skew(-23deg);
+}
+
+#button_top_right, #button_bottom_right {
+    transform: skew(17deg);
 }
 
 #button_top_left {
-    bottom: 10.2%;
-    left: 11.2%;
+    bottom: 18.1%;
+    left: 14.3%;
 }
 
 #button_bottom_left {
-    bottom: 6.4%;
-    left: 10.4%;
+    bottom: 12%;
+    left: 13.3%;
 }
 
 #button_top_right {
-    bottom: 10.2%;
-    right: 32.8%;
+    bottom: 18.3%;
+    right: 25.8%;
 }
 
 #button_bottom_right {
-    bottom: 6.4%;
-    right: 32.2%;
+    bottom: 12.5%;
+    right: 25.1%;
 }
 
 #button_top_left:hover, #button_top_right:hover {
-    box-shadow: 0px 0px 5px 5px rgb(253, 185, 0);
+    box-shadow: 0px 0px 5px 5px rgb(253, 0, 0);
 }
 
 #button_bottom_left:hover, #button_bottom_right:hover {

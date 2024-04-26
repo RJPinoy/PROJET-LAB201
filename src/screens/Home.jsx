@@ -134,7 +134,7 @@ const HomeScreen = () => {
                     </main>
 
                     <Chapter1 />
-                    {/* <ChapterDj /> */}
+                    <ChapterDj />
                 </>
             }
         </>
