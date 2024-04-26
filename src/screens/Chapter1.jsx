@@ -1,20 +1,16 @@
 import * as React from "react";
 import Nav from "../components/Nav";
+import "../styles/chapter1.css";
 
 const Chapter1 = () => {
     return (
         <>
             <Nav />
-            <div style={{
-                backgroundImage: 'url(chemin/vers/votre/image.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                minHeight: '100vh'
-            }}>
-
+            <div className="source">
             </div >
         </>
     );
 }
+
 
 export default Chapter1;

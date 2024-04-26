@@ -122,12 +122,7 @@ const HomeScreen = () => {
                 </div>
                 :
                 <>
-                    <main>
-                        <section>
-                            <article>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum pariatur, accusamus quisquam consectetur sed iste ratione animi id maxime tempora quod quam tenetur, officia quas ullam ea, natus quae expedita!</article>
-                            <article>Lorem ipsum dolor sit amet.</article>
-                        </section>
-                    </main>
+
 
                     <Chapter1 />
 
