@@ -70,3 +70,7 @@
         -webkit-appearance: none;
         background: #ffffff;
     }
+
+main {
+    height: 10000px;
+}

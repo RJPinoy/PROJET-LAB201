@@ -87,12 +87,14 @@
         margin: 0 15px;
     }
 
-    .video-upload-section {
-        margin-bottom: 20px;
+    .add_button {
+        display: flex;
+        justify-content: end;
+        margin: 10px;
     }
 
-    .video-upload-input {
-        margin-bottom: 10px;
+    .add_button button {
+        background-color: #28a745;
     }
 
     .upload-button {
@@ -123,7 +125,7 @@
         background-color: #000000;
     }
 
-    /* delete modal */
+    /* modals */
         /* Styles for the delete modal */
             .delete-modal {
                 position: fixed;
@@ -138,6 +140,8 @@
             }
 
             .modal-content {
+                display: flex;
+                flex-flow: row;
                 background-color: white;
                 color: black;
                 padding: 20px;
@@ -163,6 +167,16 @@
                 opacity: 0.8;
             }
 
+            .exit_button {
+                margin-left: 20px;
+            }
+
+            .exit_button button {
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+
             /* Style for the Cancel button */
             button.cancel-button {
                 background-color: #ddd;
@@ -173,4 +187,24 @@
             button.delete-button {
                 background-color: #f44336;
                 color: white;
+            }
+
+        /* Loader */
+            .loader {
+                width: 85px;
+                height: 35px;
+                --g1:conic-gradient(from  90deg at 3px  3px ,#0000 90deg,#000000 0);
+                --g2:conic-gradient(from -90deg at 22px 22px,#0000 90deg,#000000 0);
+                background:var(--g1),var(--g1),var(--g1), var(--g2),var(--g2),var(--g2);
+                background-size: 25px 25px;
+                background-repeat: no-repeat;
+                animation: l6 1s infinite alternate;
+            }
+            @keyframes l6 {
+                0%   {background-position:0 50% ,50% 50% ,100% 50% }
+                20%  {background-position:0 0   ,50% 50% ,100% 50% }
+                40%  {background-position:0 100%,50%  0  ,100% 50% }
+                60%  {background-position:0 50% ,50% 100%,100% 0   }
+                80%  {background-position:0 50% ,50% 50% ,100% 100%}
+                100% {background-position:0 50% ,50% 50% ,100% 50% }
             }
