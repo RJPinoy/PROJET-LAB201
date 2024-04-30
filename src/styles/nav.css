@@ -27,15 +27,18 @@
 }
 
 #sidebar li {
-    margin-bottom: 5vw;
+    filter: blur(1px);
+    padding: 2vw 0;
     text-align: start;
     font-size: 1rem;
-    transition-property: transform;
+    transition: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.5s;
 }
 
 #sidebar li:hover {
+    font-size: large;
+    filter: blur(0);
     transform: translateX(1rem);
 }
 
@@ -44,4 +47,10 @@
     margin-bottom: 2.5rem;
     text-decoration: none;
     color: inherit;
+}
+
+.active {
+    font-size: large!important;
+    filter: blur(0)!important;
+    transform: translateX(1rem)!important;
 }

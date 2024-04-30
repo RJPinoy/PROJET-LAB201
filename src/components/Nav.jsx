@@ -2,6 +2,8 @@ import "../styles/nav.css";
 import * as React from "react";
 
 const Nav = () => {
+    const [currentSection, setCurrentSection] = React.useState(null);
+
     React.useEffect(() => {
         // Function to handle smooth scrolling
         const smoothScroll = (target) => {
@@ -26,22 +28,41 @@ const Nav = () => {
         links.forEach(link => {
             link.addEventListener("click", handleClick);
         });
+        
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setCurrentSection(entry.target.id);
+                }
+            });
+        }, { threshold: 0.5 }); // Adjust threshold as needed
+
+        const sections = document.querySelectorAll('.chapter_container');
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        return () => {
+            sections.forEach(section => {
+                sectionObserver.unobserve(section);
+            });
+        };
     }, []);
 
     return (
         <>
             <div id="sidebar">
                 <ul>
-                    <li>
+                    <li className={currentSection === "chapter_1" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_1">PREMIER PAS</a>
                     </li>
-                    <li>
+                    <li className={currentSection === "chapter_dj" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_dj">CHAPITRE 2</a>
                     </li>
-                    <li>
+                    <li className={currentSection === "chapter_3" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_3">CHAPITRE 3</a>
                     </li>
-                    <li>
+                    <li className={currentSection === "chapter_4" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_4">CHAPITRE 4</a>
                     </li>
                 </ul>

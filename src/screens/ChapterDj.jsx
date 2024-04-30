@@ -1,5 +1,6 @@
 import "../styles/chapterDj.css";
 import * as React from "react";
+import Card from "../components/Card";
 
 const ChapterDj = () => {
     const [isVisible, setIsVisible] = React.useState(false);
@@ -18,8 +19,6 @@ const ChapterDj = () => {
             }
         );
 
-        console.log(observer)
-
         if (djSetRef.current) {
             observer.observe(djSetRef.current);
         }
@@ -37,19 +36,9 @@ const ChapterDj = () => {
     }
 
     return (
-        <div id="chapter_dj" className={`chapter_container ${isVisible ? "visible" : ""}`} ref={djSetRef}>
+        <div id="chapter_dj" className={`chapter_container ${isVisible ? "visible" : ""}`} ref={ djSetRef }>
             { modal ?
-                <div className="card_container">
-                    <div className="card">
-                        <button id="exit_card" onClick={ handleDjButton }>X</button>
-                        <div className="card_content">
-                            <div className="card_image"></div>
-                            <div>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, tempora officia. Suscipit deleniti, inventore ipsam cupiditate tempora maxime alias numquam deserunt obcaecati facilis, aliquid dolore quidem cum? Atque, deserunt minima!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Card modal={ modal } handleDjButton={ handleDjButton }/>
             :
                 null
             }
