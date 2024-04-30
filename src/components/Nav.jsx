@@ -26,13 +26,6 @@ const Nav = () => {
         links.forEach(link => {
             link.addEventListener("click", handleClick);
         });
-
-        // Cleanup: Remove event listeners when component unmounts
-        return () => {
-            links.forEach(link => {
-                link.removeEventListener("click", handleClick);
-            });
-        };
     }, []);
 
     return (
