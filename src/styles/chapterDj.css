@@ -1,17 +1,30 @@
+#chapter_dj {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#chapter_dj.visible {
+    opacity: 1;
+}
+
 #dj_set {
-    position: sticky;
+    position: fixed;
     bottom: 0;
-    left: 0;
-    min-width: 1200px;
-    max-width: 1980px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: auto;
     width: 1200px;
     height: 500px;
-    margin: auto;
-
     background-image: url("/Set_de_DJ_v2.png");
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: contain;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+#chapter_dj.visible #dj_set {
+    opacity: 1;
 }
 
 #button_top_left, #button_bottom_left, #button_top_right, #button_bottom_right {

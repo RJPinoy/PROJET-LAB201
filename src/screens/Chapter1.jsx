@@ -1,10 +1,11 @@
 import * as React from "react";
-import Nav from "../components/Nav";
 
 const Chapter1 = () => {
     return (
         <>
-            <Nav />
+            <div id="chapter_1" className="chapter_container">
+
+            </div>
         </>
     );
 }

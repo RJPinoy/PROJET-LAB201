@@ -5,8 +5,8 @@ import AdminBackOffice from './screens/AdminBackOffice';
 
 function App() {
   const body = document.querySelector('body');
-
   body.style.width = window.innerWidth + 'px';
+
   return (
     <>
       <Routes>
