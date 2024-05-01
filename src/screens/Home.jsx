@@ -133,8 +133,8 @@ const HomeScreen = () => {
 
                     <main>
                         <Chapter1 />
-                        <ChapterDj />
                         <Chapter3 />
+                        <ChapterDj />
                         <Chapter4 />
                     </main>
                 </>
