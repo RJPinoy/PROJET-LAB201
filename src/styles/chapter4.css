@@ -4,6 +4,7 @@
 }
 
 .content {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,6 +27,7 @@
     background-image: url('/video_background.png');
     background-position: center center;
     background-size: 100% 100%;
+    z-index: 1;
 }
 
 .video_title {
@@ -59,4 +61,16 @@
 
 .video_content iframe {
     margin-bottom: 15px;
+}
+
+.grid {
+    position: absolute;
+    top: 25%;
+    right: 15%;
+    width: 500px;
+    height: 500px;
+    background-image: url('/asset_grille.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
