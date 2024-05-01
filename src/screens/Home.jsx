@@ -61,11 +61,6 @@ const HomeScreen = () => {
 
             root?.addEventListener('mousemove', handleMouseMove);
             soundButton?.addEventListener('mouseleave', handleSoundButtonMouseLeave);
-
-            return () => {
-                root?.removeEventListener('mousemove', handleMouseMove);
-                soundButton?.removeEventListener('mouseleave', handleSoundButtonMouseLeave);
-            };
         }
     }, [videoHomepage]);
 
