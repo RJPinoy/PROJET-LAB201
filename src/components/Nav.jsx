@@ -54,16 +54,16 @@ const Nav = () => {
             <div id="sidebar">
                 <ul>
                     <li className={currentSection === "chapter_1" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_1">PREMIER PAS</a>
+                        <span>——</span> <a href="#chapter_1">Les Origines du breaking</a>
                     </li>
                     <li className={currentSection === "chapter_dj" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_dj">CHAPITRE 2</a>
+                        <span>——</span> <a href="#chapter_dj">La culture Hip-Hop en France</a>
                     </li>
                     <li className={currentSection === "chapter_3" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_3">CHAPITRE 3</a>
+                        <span>——</span> <a href="#chapter_3">Les champions du breacking</a>
                     </li>
                     <li className={currentSection === "chapter_4" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_4">CHAPITRE 4</a>
+                        <span>——</span> <a href="#chapter_4">Le breacking aux jeux olympiques</a>
                     </li>
                 </ul>
             </div>

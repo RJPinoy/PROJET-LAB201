@@ -1,0 +1,34 @@
+{
+    "breaker": [
+        {
+            "name": "Mounir Biba",
+            "aka": "Bboy Mounir",
+            "picture": "/breaker/mounir_biba.png",
+            "content": "Danseur emblématique du groupe le plus titré au monde, Mounir devient auprès de Vagabond Crew une référence internationale en matière de Breakdance. Après plus de 20 ans de carrière, il affiche le plus gros palmarès avec 13 titres de champion du monde et 4 titres de vice-champion du monde toutes catégories. C'est au sein de Vagabond Crew que Mounir a tout appris, son assiduité, son travail rigoureux et sa patience, ce qui lui vaut une place toute particulière sur la planète Breakdance. Coach en motivation depuis près de 10 ans, il parcourt le monde et intervient dans plus de 60 pays à la recherche de la diversité et de l'excellence au travers de ses conférences, workshops et seminaires. Adidas, Red Bull, G-Shock ou encore la BPCE, sont quelques uns des grands groupes qui lui font confiance. Egalement référant pour Paris 2024 et la World Dance Sport Federation qu'il accompagne et soutient dans la volonté d'inclure le Breakdance aux Jeux Olympiques, il met aujourd'hui toute son expertise à profit afin de mener à bien ce projet historique. En parralèlle, Mounir développe ses formations basés sur le dépassement de soi et la confiance en soi au sein de sa structure fondée en 2013 HWE: 'Travailler Dur Pour Que Tout Devienne Facile'. Parrain des Etoiles du Sport, Mounir participe activement au développement des futurs champions français."
+        },
+        {
+            "name": "Sya Dembélé",
+            "aka": "Bgirl Syssy",
+            "picture": "/breaker/syssy.png",
+            "content": "À seulement 16 ans, Syssy a déjà décroché la médaille de bronze lors des championnats d'Europe de breakdance en 2023. Elle est considérée comme un grand espoir pour les Jeux olympiques de Paris 2024. Sa danse se caractérise par son explosivité et sa musicalité. Elle a également brillé lors de compétitions internationales, notamment à New York et au Japon."
+        },
+        {
+            "name": "Sarah Bee",
+            "aka": "Bgirl Sarah",
+            "picture": "/breaker/sarah_bee.png",
+            "content": "Elle est l'une des étoiles montantes de la piste de breakdance, cette danse acrobatique urbaine issue de la culture hip-hop qui fera son entrée dans l'arène olympique en 2024. Kimie Alvarez alias Bgirl Kimie, 15 ans, trimballe sous ses longues nattes de petite fille-modèle une dégaine ultra relax, celle d'une sportive heureuse et appliquée qui « kiffe » danser avant tout. Championne de France et du monde des moins de 16 ans, ce petit ange tournoyant pourrait bien faire un bond pour les JO de Paris."
+        },
+        {
+            "name": "Kimie Alvarez",
+            "aka": "Bgirl Kimie",
+            "picture": "/breaker/kimie_alvarez.png",
+            "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium porro inventore, eos voluptate consequatur ab amet vel quia, architecto numquam assumenda cupiditate nesciunt ipsum rerum possimus dolor, fuga laboriosam libero?"
+        },
+        {
+            "name": "Marlone Alvarez",
+            "aka": "Bboy Marlone",
+            "picture": "/breaker/marlone_alvarez.png",
+            "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium porro inventore, eos voluptate consequatur ab amet vel quia, architecto numquam assumenda cupiditate nesciunt ipsum rerum possimus dolor, fuga laboriosam libero?"
+        }
+    ]
+}
