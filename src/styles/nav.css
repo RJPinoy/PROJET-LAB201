@@ -37,7 +37,7 @@
 }
 
 #sidebar li:hover {
-    font-size: large;
+    font-size: 1.5rem;
     filter: blur(0);
     transform: translateX(1rem);
 }
@@ -50,7 +50,7 @@
 }
 
 .active {
-    font-size: large!important;
+    font-size: 1.5rem!important;
     filter: blur(0)!important;
     transform: translateX(1rem)!important;
 }
