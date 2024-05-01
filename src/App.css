@@ -21,13 +21,18 @@ body {
   text-align: center;
 }
 
+.d-none {
+  max-height: 0;
+  overflow: hidden;
+}
+
 .chapter_container {
   width: 100%;
-  min-height: 800px;
+  min-height: 1000px;
   background: url('/background.jpg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 h1, h2, li {

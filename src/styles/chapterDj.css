@@ -30,10 +30,12 @@
     
     #dj_set.visible {
         opacity: 1;
+        max-height: 9999px;
     }
 
     #chapter_dj.visible #dj_set {
         opacity: 1;
+        max-height: 9999px;
     }
 
     #button_top_left, #button_second_left, #button_third_left, #button_end_left, #button_bottom_left, #button_top_right, #button_bottom_right {

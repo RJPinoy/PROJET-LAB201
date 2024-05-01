@@ -24,12 +24,6 @@ const ChapterDj = () => {
         if (djSetRef.current) {
             observer.observe(djSetRef.current);
         }
-
-        return () => {
-            if (djSetRef.current) {
-                observer.unobserve(djSetRef.current);
-            }
-        };
     }, []);
 
     const handleDjButton = (index) => {
@@ -45,13 +39,13 @@ const ChapterDj = () => {
             :
                 null
             }
-            <div id="dj_set" className={ `${ isVisible ? "visible" : "" }` } >
+            <div id="dj_set" className={ `${ isVisible ? "visible" : "d-none" }` } >
                 <div id="button_top_left" onClick={() => handleDjButton(0)}></div>
                 <div id="button_second_left" onClick={() => handleDjButton(1)}></div>
                 <div id="button_third_left" onClick={() => handleDjButton(2)}></div>
                 <div id="button_end_left" onClick={() => handleDjButton(3)}></div>
                 <div id="button_bottom_left" onClick={() => handleDjButton(4)}></div>
-                {/* <div id="button_top_right" onClick={() => handleDjButton(5)}></div> */}
+                <div id="button_top_right" onClick={() => handleDjButton(6)}></div>
                 {/* <div id="button_bottom_right" onClick={() => handleDjButton(6)}></div> */}
             </div>
         </div>

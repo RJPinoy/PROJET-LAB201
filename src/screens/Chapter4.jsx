@@ -19,9 +19,6 @@ const Chapter4 = () => {
                             <p>JOJ 2018 / Break Dance : Martin Lejeune termine en argent !</p>
                         </div>
                         <div className="video_content">
-                            {/* <button>
-                                <img src="/play_button.png" alt="Play" />
-                            </button> */}
                             <iframe width="100%" height="80%" src="https://www.dailymotion.com/embed/video/x6v2tsw" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                         </div>
                     </div>

@@ -1,40 +1,27 @@
-.chapter_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    width: 80%;
-    float: right;
-    padding: 0 50px;
-}
-
-.text {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    float: right;
-    text-align: center;
-    width: 50%;
-}
-
-.titre {
-    font-size: 32px;
-    color: white;
-    text-align: center;
-    padding: 50px 0;
-    margin: 0;
-}
-
-.images {
+.grid2 {
     position: relative;
-    width: 50%;
-    height: auto;
+    width: 500px;
+    height: 500px;
+    background-image: url('/asset_grille.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
-.images img {
-    width: 140px;
+.grid2 .pic1 {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translateY(-50%) rotate(9deg);
+    width: 500px;
+    left: -100px;
+}
+
+.grid2 .pic2 {
+    position: absolute;
+    width: 500px;
+    left: 100px;
+    transform: rotate(-20deg);
+}
+
+.clickable_name {
+    cursor: pointer;
+    text-decoration: underline;
 }
