@@ -13,6 +13,7 @@ const BackOffice = ({ user }) => {
     const [videosList, setVideosList] = React.useState([]);
     const [uploading, setUploading] = React.useState(false);
     const [uploadError, setUploadError] = React.useState(null);
+    const [addModal, setAddModal] = React.useState(false);
     const [deleteModal, setDeleteModal] = React.useState(false);
 
     const videosListRef = ref(storage, "videos/");
@@ -69,6 +70,20 @@ const BackOffice = ({ user }) => {
             .finally(() => {
                 setUploading(false); // Set uploading status to false after upload completes or fails
             });
+
+            
+        // Check upload duration every minute
+        const uploadStartTime = Date.now(); // Record upload start time
+
+        const checkDurationInterval = setInterval(() => {
+            const uploadDuration = Date.now() - uploadStartTime;
+            const minutesElapsed = Math.floor(uploadDuration / (1000 * 60));
+            if (minutesElapsed >= 1) {
+                // If more than a minute has passed, show slow network message
+                setUploadError("Slow network is detected.");
+                clearInterval(checkDurationInterval); // Stop checking duration
+            }
+        }, 60000); // Check every minute
     };
 
     const sendVideoToFirestore = async (metadata) => {
@@ -98,15 +113,21 @@ const BackOffice = ({ user }) => {
     const handleCheck = async (video) => {
         console.log("should change homepage bool :", video.name);
         try {
-            const querySnapshot = await getDocs(collection(firestore, "videos"));
             const batch = writeBatch(firestore);
-
+    
+            // Update the clicked video to true
+            const videoDocRef = doc(firestore, "videos", video.name);
+            batch.update(videoDocRef, { homepage: true });
+    
+            // Set all other videos to false
+            const querySnapshot = await getDocs(collection(firestore, "videos"));
             querySnapshot.forEach((doc) => {
-                const docRef = doc.ref;
-                const currentData = doc.data();
-                batch.update(docRef, { homepage: !currentData.homepage });
+                if (doc.id !== video.name) {
+                    const docRef = doc.ref;
+                    batch.update(docRef, { homepage: false });
+                }
             });
-
+    
             await batch.commit();
             console.log("All documents updated successfully.");
             window.location.reload();
@@ -119,6 +140,10 @@ const BackOffice = ({ user }) => {
         setDeleteModal(true);
         setCurrentVideo(video)
     };
+
+    const handleAdd = () => {
+        setAddModal(!addModal);
+    }
 
     const confirmDelete = async (video) => {
         console.log("should delete :", video.name);
@@ -144,6 +169,16 @@ const BackOffice = ({ user }) => {
         }
     };
 
+    const sizeToReadableFormat = (size) => {
+        if (size < 1024) {
+            return size + " B";
+        } else if (size < 1024 * 1024) {
+            return (size / 1024).toFixed(2) + " KB";
+        } else {
+            return (size / (1024 * 1024)).toFixed(2) + " MB";
+        }
+    };
+
     return (
         <>
             { deleteModal ?
@@ -161,6 +196,37 @@ const BackOffice = ({ user }) => {
             :
                 null
             }
+
+            { addModal ?
+                <>
+                    <div className="delete-modal">
+                        <div className="modal-content">
+                            <div className="video-upload-section">
+                                <div className="video-upload-input">
+                                    <input type="file" accept="video/mp4" onChange={(e) => setVideoUpload(e.target.files[0])} />
+                                    <button className="upload-button" onClick={uploadVideo}>
+                                        Upload video
+                                    </button>
+                                </div>
+                                {uploading && 
+                                    <>
+                                        <p>Uploading video... Please wait... This can take a few minutes...</p>
+                                        <div className="loader"></div>
+                                    </>
+                                } {/* Show uploading status */}
+                                {uploadError && <p className="error-message">{ uploadError }</p>} {/* Show error message */}
+                            </div>
+
+                            <div className="exit_button">
+                                <button onClick={ handleAdd }>X</button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            :
+                null
+            }
+
             <nav className="user-info">
                 <Link to="/">
                     <button>
@@ -179,15 +245,8 @@ const BackOffice = ({ user }) => {
             </nav>
 
             <div className="backoffice-container">
-                <div className="video-upload-section">
-                    <div className="video-upload-input">
-                        <input type="file" accept="video/mp4" onChange={(e) => setVideoUpload(e.target.files[0])} />
-                        <button className="upload-button" onClick={uploadVideo}>
-                            Upload video
-                        </button>
-                    </div>
-                    {uploading && <p>Uploading video... Please wait... This can take a few minutes...</p>} {/* Show uploading status */}
-                    {uploadError && <p className="error-message">{uploadError}</p>} {/* Show error message */}
+                <div className="add_button">
+                    <button onClick={ handleAdd }>Add a video</button>
                 </div>
 
                 <table className="video-table">
@@ -197,8 +256,7 @@ const BackOffice = ({ user }) => {
                             <th>Video</th>
                             <th>Name</th>
                             <th>Type</th>
-                            <th>Size (octets)</th>
-                            <th>URL</th>
+                            <th>Size</th>
                             <th>Set video to homepage</th>
                             <th>Delete video</th>
                         </tr>
@@ -217,8 +275,7 @@ const BackOffice = ({ user }) => {
                                     </td>
                                     <td>{videos[index].name}</td>
                                     <td>{videos[index].type}</td>
-                                    <td>{videos[index].size}</td>
-                                    <td>{videos[index].url}</td>
+                                    <td>{ sizeToReadableFormat(videos[index].size) }</td>
                                     <td>
                                         <button onClick={() => handleCheck(videos[index])}>Set as homepage video</button>
                                     </td>

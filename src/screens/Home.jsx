@@ -2,8 +2,11 @@ import * as React from "react";
 import "../styles/home.css";
 import { firestore } from "../../firebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Nav from "../components/Nav";
 import Chapter1 from "./Chapter1";
+import Chapter2 from "./Chapter2";
 import ChapterDj from "./ChapterDj";
+import Chapter4 from "./Chapter4";
 
 const HomeScreen = () => {
     const [videoHomepage, setVideoHomepage] = React.useState();
@@ -12,21 +15,21 @@ const HomeScreen = () => {
     const [volumeInputValue, setVolumeInputValue] = React.useState(0.5);
     const [isLoading, setIsLoading] = React.useState(true);
 
-    const fetchVideo = async () => {
-        const q = query(collection(firestore, "videos"), where("homepage", "==", true));
-
-        try {
-            const videosSnapshot = await getDocs(q);
-            videosSnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-                setVideoHomepage(doc.data())
-            });
-        } catch (error) {
-            console.error("Error fetching video names:", error);
-        }
-    };
-
     React.useEffect(() => {
+        const fetchVideo = async () => {
+            const q = query(collection(firestore, "videos"), where("homepage", "==", true));
+    
+            try {
+                const videosSnapshot = await getDocs(q);
+                videosSnapshot.forEach((doc) => {
+                    // console.log(doc.id, " => ", doc.data());
+                    setVideoHomepage(doc.data())
+                });
+            } catch (error) {
+                console.error("Error fetching video names:", error);
+            }
+        };
+
         fetchVideo();
         setIsLoading(false);
     }, []);
@@ -126,10 +129,14 @@ const HomeScreen = () => {
                 </div>
                 :
                 <>
+                    <Nav />
 
-
-                    <Chapter1 />
-
+                    <main>
+                        <Chapter1 />
+                        <Chapter2 />
+                        <ChapterDj />
+                        <Chapter4 />
+                    </main>
                 </>
             }
         </>
