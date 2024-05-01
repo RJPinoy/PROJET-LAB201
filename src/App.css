@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'BlowBrush';
+  src: url('./fonts/BlowBrush/blowbrush.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('./fonts/Coolvetica/coolvetica_rg.otf') format('opentype');
+}
+
 body {
   flex-flow: column;
   overflow-x: hidden;
@@ -18,4 +28,17 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+h1, h2, li {
+  font-family: 'BlowBrush';
+}
+
+p {
+  font-family: 'Coolvetica';
+  font-size: large;
+}
+
+h2 {
+  font-size: 3rem!important;
 }

@@ -4,7 +4,7 @@ const Chapter1 = () => {
     return (
         <>
             <div id="chapter_1" className="chapter_container">
-                <h1 className="titre">PREMIERS PAS</h1>
+                <h2 className="titre">PREMIERS PAS</h2>
                 <div className="chapter1_content">
                     <div className="text">
                         <p>Le breaking, également connu sous le nom de breakdance, est un style de danse urbaine qui a émergé dans les années 1970 dans les quartiers défavorisés de New York.</p>

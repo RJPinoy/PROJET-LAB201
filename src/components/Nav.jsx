@@ -63,7 +63,7 @@ const Nav = () => {
                         <span>——</span> <a href="#chapter_dj">Les champions du breaking</a>
                     </li>
                     <li className={currentSection === "chapter_4" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_4">Le breacking aux jeux olympiques</a>
+                        <span>——</span> <a href="#chapter_4">Le breaking aux jeux olympiques</a>
                     </li>
                 </ul>
             </div>
