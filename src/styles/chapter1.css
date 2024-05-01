@@ -41,8 +41,9 @@
 
 .pic1 {
     position: relative;
-    bottom: -50%;
-    width: 10vw;
+    right: 100px;
+    bottom: -200px;
+    width: 200px;
     z-index: 2;
     transform: rotate(20deg);
 }

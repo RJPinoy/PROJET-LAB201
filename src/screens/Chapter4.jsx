@@ -22,7 +22,7 @@ const Chapter4 = () => {
                             <iframe width="100%" height="80%" src="https://www.dailymotion.com/embed/video/x6v2tsw" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                         </div>
                     </div>
-                    <div className="grid"></div>
+                    <div className="grid grid4"></div>
                 </div>
             </div>
         </>
