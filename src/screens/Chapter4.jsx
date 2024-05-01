@@ -21,7 +21,7 @@ const Chapter4 = () => {
                             {/* <button>
                                 <img src="/play_button.png" alt="Play" />
                             </button> */}
-                            <iframe width="100%" height="80%" src="https://www.youtube.com/embed/cZ1mm_SPlA4?si=nwzifKuLILphtDpD&amp;start=382" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <iframe width="100%" height="80%" src="https://www.dailymotion.com/embed/video/x6v2tsw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
