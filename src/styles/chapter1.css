@@ -1,27 +1,35 @@
+.chapter1_content {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 100%;
+    float: right;
+    position: relative;
+}
+
 .text {
     color: white;
-    width: 600px;
-    height: auto;
+    width: 50%;
     padding: 20px;
     margin: 20px;
-    left: 35%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
     transition: opacity 0.5s ease-in-out;
     font-family: Arial, sans-serif;
     text-align: center;
     border-radius: 10px;
 }
 
-img {
-    width: 140px;
+.images {
+    position: relative;
+    width: 50%;
     height: auto;
-    position: absolute;
-    top: 70%;
-    left: 68%;
-    transform: translateY(-50%) rotate(9deg);
+}
 
+.images img {
+    width: 140px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(-50%) rotate(9deg);
 }
 
 .titre {
@@ -29,6 +37,6 @@ img {
     font-size: 32px;
     color: white;
     text-align: center;
-    padding-top: 50px;
+    padding: 50px 0;
     margin: 0;
 }

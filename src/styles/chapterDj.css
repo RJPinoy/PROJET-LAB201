@@ -5,6 +5,7 @@
 
 /* DJ SET */
     #chapter_dj {
+        min-height: 1000px!important;
         background: url('/dj_background.png');
         background-repeat: no-repeat;
         background-position: center center;
