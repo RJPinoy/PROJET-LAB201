@@ -1,4 +1,5 @@
-import * as React from "react";
+import "../styles/chapter2.css";
+
 const Chapter2 = () => {
     return (
         <>

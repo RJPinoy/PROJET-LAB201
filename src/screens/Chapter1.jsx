@@ -16,8 +16,6 @@ const Chapter1 = () => {
                         <img src="/Pics.png" alt="Image" />
                         <img src="/asset_grille.png" alt="Image" />
                     </div>
-
-
                 </div>
             </div >
         </>
