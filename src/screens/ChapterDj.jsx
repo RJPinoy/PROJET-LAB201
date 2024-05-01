@@ -39,13 +39,13 @@ const ChapterDj = () => {
     }
 
     return (
-        <div id="chapter_dj" className={`chapter_container ${isVisible ? "visible" : ""}`} ref={ djSetRef }>
+        <div id="chapter_dj" className={'chapter_container'} ref={ djSetRef }>
             { modal ?
                 <Card handleDjButton={ handleDjButton } breaker={data.breaker[currentBreakerIndex]} />
             :
                 null
             }
-            <div id="dj_set">
+            <div id="dj_set" className={ `${ isVisible ? "visible" : "" }` } >
                 <div id="button_top_left" onClick={() => handleDjButton(0)}></div>
                 <div id="button_second_left" onClick={() => handleDjButton(1)}></div>
                 <div id="button_third_left" onClick={() => handleDjButton(2)}></div>

@@ -1,13 +1,16 @@
+@keyframes glow-button {
+	0% { background-position: 0; }
+	100% { background-position: 200px; }
+}
+
 /* DJ SET */
     #chapter_dj {
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+        background: url('/dj_background.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
     }
-
-    #chapter_dj.visible {
-        opacity: 1;
-    }
-
+    
     #dj_set {
         position: fixed;
         bottom: 0;
@@ -23,6 +26,10 @@
         transition: opacity 0.5s ease-in-out;
         opacity: 0;
     }
+    
+    #dj_set.visible {
+        opacity: 1;
+    }
 
     #chapter_dj.visible #dj_set {
         opacity: 1;
@@ -36,6 +43,15 @@
         cursor: pointer;
         transition: 0.5s ease-in-out;
         /* border: 1px solid red; */
+        /* background-color: #ffffff; */
+        overflow: hidden;
+        background: linear-gradient(
+            120deg,
+            rgba(255,255,255, 0) 30%,
+            rgba(255,255,255, .8),
+            rgba(255,255,255, 0) 70%
+        );
+        animation: glow-button 5s infinite linear;
     }
 
     #button_top_left, #button_second_left, #button_third_left, #button_end_left, #button_bottom_left {
@@ -47,7 +63,7 @@
     }
 
     #button_top_left {
-        bottom: 18.1%;
+        bottom: 18.3%;
         left: 14.4%;
     }
 
@@ -67,7 +83,7 @@
     }
 
     #button_bottom_left {
-        bottom: 12%;
+        bottom: 12.2%;
         left: 13.3%;
     }
 

@@ -56,11 +56,11 @@ const Nav = () => {
                     <li className={currentSection === "chapter_1" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_1">Les Origines du breaking</a>
                     </li>
-                    <li className={currentSection === "chapter_3" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_3">La culture Hip-Hop en France</a>
+                    <li className={currentSection === "chapter_2" ? "active" : ""}>
+                        <span>——</span> <a href="#chapter_2">La culture Hip-Hop en France</a>
                     </li>
                     <li className={currentSection === "chapter_dj" ? "active" : ""}>
-                        <span>——</span> <a href="#chapter_dj">Les champions du breacking</a>
+                        <span>——</span> <a href="#chapter_dj">Les champions du breaking</a>
                     </li>
                     <li className={currentSection === "chapter_4" ? "active" : ""}>
                         <span>——</span> <a href="#chapter_4">Le breacking aux jeux olympiques</a>

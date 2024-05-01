@@ -4,8 +4,8 @@ import { firestore } from "../../firebaseConfig";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import Nav from "../components/Nav";
 import Chapter1 from "./Chapter1";
+import Chapter2 from "./Chapter2";
 import ChapterDj from "./ChapterDj";
-import Chapter3 from "./Chapter3";
 import Chapter4 from "./Chapter4";
 
 const HomeScreen = () => {
@@ -133,7 +133,7 @@ const HomeScreen = () => {
 
                     <main>
                         <Chapter1 />
-                        <Chapter3 />
+                        <Chapter2 />
                         <ChapterDj />
                         <Chapter4 />
                     </main>
