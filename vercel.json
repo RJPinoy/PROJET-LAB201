@@ -1,6 +1,3 @@
 {
-    "rewrites": [
-      { "src": "/", "dest": "/" },
-      { "src": "/admin", "dest": "/admin" }
-    ]
-}
+    "rewrites": [{ "source": "/admin", "destination": "/admin" }]
+  }
