@@ -42,7 +42,7 @@
 .pic1 {
     position: relative;
     bottom: -50%;
-    width: 200px;
+    width: 10vw;
     z-index: 2;
     transform: rotate(20deg);
 }

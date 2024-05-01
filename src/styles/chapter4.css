@@ -65,8 +65,8 @@
 
 .grid {
     position: absolute;
-    top: 25%;
-    right: 15%;
+    top: -100px;
+    right: 0;
     width: 500px;
     height: 500px;
     background-image: url('/asset_grille.png');
