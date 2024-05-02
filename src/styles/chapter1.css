@@ -32,6 +32,7 @@
 }
 
 .titre {
+    width: 100%;
     font-size: 32px;
     color: white;
     text-align: center;
